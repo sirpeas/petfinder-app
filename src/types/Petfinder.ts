@@ -22,7 +22,7 @@ export type Animal = {
   tags: string[];
   name: string;
   description: string;
-  photos: Photo[];
+  photos: PetPhoto[];
   status: PetStatus;
   published_at: string;
   contact: Contact;
@@ -55,7 +55,7 @@ export type AnimalEnvironment = {
   cats: boolean | null;
 };
 
-export type Photo = {
+export type PetPhoto = {
   small: string;
   medium: string;
   large: string;
