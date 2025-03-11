@@ -16,7 +16,7 @@ export default function (plop) {
       {
         type: 'list',
         name: 'atomType',
-        choices: ['atom', 'molecule', 'organism', 'template'],
+        choices: ['atom', 'molecule', 'organism', 'template', 'pages'],
         message: 'Atomic Type',
       },
       {
