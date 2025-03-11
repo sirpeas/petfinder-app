@@ -1,4 +1,4 @@
-import { MagnifyingGlass, Shuffle, House, List } from "@phosphor-icons/react/dist/ssr";
+import { MagnifyingGlass, Shuffle, House, Rows } from "@phosphor-icons/react/dist/ssr";
 import { ROUTES } from './ROUTES';
 
 export const NAVIGATION = [{
@@ -12,7 +12,7 @@ export const NAVIGATION = [{
 }, {
   url: ROUTES.LIST,
   label: 'Reel list',
-  name: <List size={24} />,
+  name: <Rows size={24} />,
 }, {
   url: ROUTES.SEARCH,
   label: 'Search',
