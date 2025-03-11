@@ -10,9 +10,9 @@ export const Header = () => {
         <Link href={ROUTES.HOME} aria-label="Go to hompage">
           <Image src="/petfinder-app.svg" alt="logo" height={40} width={40} role="presentation" />
         </Link>
-        <nav className="text-black flex gap-4">
+        <nav className="text-black flex gap-6">
           {NAVIGATION.map((n) => (
-            <Link key={n.url} href={n.url} aria-label={n.label}>{n.name}</Link>
+            <Link key={n.url} href={n.url} aria-label={n.label} className="hover:transform-[scale(1.2)] transition-transform">{n.name}</Link>
           ))}
         </nav>
       </header>
