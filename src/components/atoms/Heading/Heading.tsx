@@ -4,7 +4,7 @@ import { Props } from './types';
 import clsx from 'clsx';
 
 const LEVEL_TO_CLASSNAMES = {
-  h1: "text-5xl font-bold",
+  h1: "text-5xl font-semibold",
   h2: "text-3xl font-semibold",
   h3: "text-2xl font-medium",
   h4: "text-xl font-medium",
@@ -22,7 +22,7 @@ export const Heading: FC<Props> = (props) => {
   const Heading = as as ElementType;
 
   return (
-    <Heading className={clsx(LEVEL_TO_CLASSNAMES[as], className)}>
+    <Heading className={clsx('text-gray-800', LEVEL_TO_CLASSNAMES[as], className)}>
       {children}
     </Heading>
   );
