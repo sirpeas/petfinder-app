@@ -16,7 +16,7 @@ export const PetCard: FC<Props> = (props) => {
   }, [photos]);
 
   return (
-    <div className="max-w-xl w-full rounded bg-white p-8" data-scroll-id={id}>
+    <div className="max-w-xl w-full rounded bg-white p-8">
       <div className="h-max max-h-160 min-h-72 overflow-hidden relative">
         <Heading as="h3" className="absolute bottom-0 py-2 px-4 bg-white">{name}</Heading>
         <img className="w-full" src={mainPhoto} alt={`${name} ${type}`} />

@@ -6,9 +6,11 @@ import { PetfinderAPI } from '@/services/API';
 import { PetCard } from '@/components/molecules/PetCard';
 import { Spinner } from '@/components/atoms/Spinner';
 import { Button } from '@/components/atoms/Button';
+import { useArrowNavigation } from '@/hooks';
 
 export const PetList = () => {
   const { ref, inView } = useInView({ threshold: 1, });
+  const { containerRef } = useArrowNavigation();
   const { data, isFetching ,isError, hasNextPage, fetchNextPage, refetch } = useInfiniteQuery({
     queryKey: ['animals'],
     queryFn: ({ pageParam }) => PetfinderAPI.getAnimals({ page: pageParam }),
@@ -45,13 +47,13 @@ export const PetList = () => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-12">
-      {data?.pages.map((page) => (
-        <div key={page.pagination.current_page} className="flex flex-col items-center justify-center gap-12">
-          {page?.animals.map((pet) => (
+      <div ref={containerRef} className="flex flex-col items-center justify-center gap-12">
+        {data?.pages.map((page) => (
+          page?.animals.map((pet) => (
             <PetCard key={pet.id} id={pet.id} photos={pet.photos} name={pet.name} description={pet.description} type={pet.type} age={pet.age} gender={pet.gender} />
-          ))}
-        </div>
-      ))}
+          ))
+        ))}
+      </div>
       <div ref={ref} className="flex flex-col items-center justify-center">
         {isFetching ? <Spinner /> : null}
         {!hasNextPage ? (
