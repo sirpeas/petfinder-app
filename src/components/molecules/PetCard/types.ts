@@ -5,6 +5,7 @@ export type Props = {
   photos: PetPhoto[];
   name: string;
   description: string;
+  species: string;
   type: string;
   age: string;
   gender: string;

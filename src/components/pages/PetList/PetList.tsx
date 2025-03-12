@@ -50,13 +50,13 @@ export const PetList = () => {
       <div ref={containerRef} className="flex flex-col items-center justify-center gap-12">
         {data?.pages.map((page) => (
           page?.animals.map((pet) => (
-            <PetCard key={pet.id} id={pet.id} photos={pet.photos} name={pet.name} description={pet.description} type={pet.type} age={pet.age} gender={pet.gender} />
+            <PetCard key={pet.id} id={pet.id} photos={pet.photos} name={pet.name} description={pet.description} type={pet.type} age={pet.age} gender={pet.gender} species={pet.species} />
           ))
         ))}
       </div>
       <div ref={ref} className="flex flex-col items-center justify-center">
         {isFetching ? <Spinner /> : null}
-        {!hasNextPage ? (
+        {!hasNextPage && !isFetching ? (
           <div className="py-12 flex flex-col items-center justify-center">
             <p className="text-center text-lg italic font-semibold text-gray-600">
               Seems like you seen all of the pets.
