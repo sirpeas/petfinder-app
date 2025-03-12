@@ -3,7 +3,7 @@ import { getAccessToken } from '@/lib/api/getPetfinderToken';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { proxy?: string[] } } // Retrieve params properly
+  { params }: { params: { proxy?: string[] } }, // Retrieve params properly
 ) {
   try {
     const { proxy } = await params;
@@ -17,7 +17,6 @@ export async function GET(
     if (!accessToken) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-
 
     const petfinderUrl = new URL(`https://api.petfinder.com/v2/${apiPath}`);
     req.nextUrl.searchParams.forEach((value, key) => {

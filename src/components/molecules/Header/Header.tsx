@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -23,7 +23,11 @@ export const Header = () => {
             href={n.url}
             aria-label={n.label}
             title={n.label}
-            className={clsx('hover:transform-[scale(1.2)] transition-transform text-gray-800', pathname === n.url ? 'transform-[scale(1.4)]' : '')}>
+            className={clsx(
+              'hover:transform-[scale(1.2)] transition-transform text-gray-800',
+              pathname === n.url ? 'transform-[scale(1.4)]' : '',
+            )}
+          >
             {n.name}
           </Link>
         ))}

@@ -5,14 +5,14 @@ import { PetfinderAPI } from '@/services/API';
 
 const fetchData = async () => {
   return await PetfinderAPI.getAnimals();
-}
+};
 
 export default async function Page() {
   const queryClient = new QueryClient();
 
   // Prefetch data for this page
   await queryClient.prefetchQuery({
-    queryKey: ["todos"],
+    queryKey: ['todos'],
     queryFn: fetchData,
   });
 

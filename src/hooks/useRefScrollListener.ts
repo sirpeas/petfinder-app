@@ -1,6 +1,10 @@
 import { RefObject, useEffect } from 'react';
 
-export const useRefScrollListener = (ref: RefObject<HTMLDivElement | null>, callback: (e: Event) => void, startToWatch = true) => {
+export const useRefScrollListener = (
+  ref: RefObject<HTMLDivElement | null>,
+  callback: (e: Event) => void,
+  startToWatch = true,
+) => {
   useEffect(() => {
     // const element = ref.current;
     if (startToWatch) {

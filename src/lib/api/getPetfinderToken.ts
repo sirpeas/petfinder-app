@@ -35,4 +35,4 @@ export const getAccessToken = async (): Promise<string> => {
     console.error('Error fetching access token:', error);
     throw new Error('Failed to retrieve access token');
   }
-}
+};

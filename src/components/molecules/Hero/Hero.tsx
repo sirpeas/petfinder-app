@@ -4,7 +4,7 @@ import { Props } from './types';
 import { Heading } from '@/components/atoms/Heading';
 
 export const Hero: FC<Props> = (props) => {
-  const { } = props;
+  const {} = props;
 
   return (
     <div>

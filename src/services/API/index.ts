@@ -1,1 +1,1 @@
-export { PetfinderAPI } from './Petfinder'
+export { PetfinderAPI } from './Petfinder';

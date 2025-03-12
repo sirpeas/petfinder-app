@@ -8,20 +8,16 @@ export const PetfinderAPI = {
       searchParams: params,
     }).json<{ animals: Animal[]; pagination: Pagination }>(),
 
-  getAnimalById: (id: number) =>
-    get(`petfinder/animals/${id}`).json<{ animal: Animal }>(),
+  getAnimalById: (id: number) => get(`petfinder/animals/${id}`).json<{ animal: Animal }>(),
 
   getOrganizations: (params?: OrganizationSearchParams) =>
     get('petfinder/organizations', {
       searchParams: params,
     }).json<{ organizations: Organization[]; pagination: Pagination }>(),
 
-  getOrganizationById: (id: string) =>
-    get(`organizations/${id}`).json<{ organization: Organization }>(),
+  getOrganizationById: (id: string) => get(`organizations/${id}`).json<{ organization: Organization }>(),
 
-  getAnimalTypes: () =>
-    get('petfinder/types').json<{ types: string[] }>(),
+  getAnimalTypes: () => get('petfinder/types').json<{ types: string[] }>(),
 
-  getAnimalBreeds: (type: string) =>
-    get(`petfinder/types/${type}/breeds`).json<{ breeds: PetBreeds[] }>(),
+  getAnimalBreeds: (type: string) => get(`petfinder/types/${type}/breeds`).json<{ breeds: PetBreeds[] }>(),
 };

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { FC, useState } from 'react';
 
 import { Props } from './types';
@@ -10,9 +10,7 @@ export const AppProviders: FC<Props> = (props) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <HydrationBoundary>
-        {children}
-      </HydrationBoundary>
+      <HydrationBoundary>{children}</HydrationBoundary>
     </QueryClientProvider>
   );
 };

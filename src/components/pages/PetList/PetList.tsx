@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
@@ -9,9 +9,9 @@ import { Button } from '@/components/atoms/Button';
 import { useArrowNavigation } from '@/hooks';
 
 export const PetList = () => {
-  const { ref, inView } = useInView({ threshold: 1, });
+  const { ref, inView } = useInView({ threshold: 1 });
   const { containerRef } = useArrowNavigation();
-  const { data, isFetching ,isError, hasNextPage, fetchNextPage, refetch } = useInfiniteQuery({
+  const { data, isFetching, isError, hasNextPage, fetchNextPage, refetch } = useInfiniteQuery({
     queryKey: ['animals'],
     queryFn: ({ pageParam }) => PetfinderAPI.getAnimals({ page: pageParam }),
     initialPageParam: 1,
@@ -23,10 +23,10 @@ export const PetList = () => {
 
   const handleRetryRefetch = () => {
     refetch();
-  }
+  };
 
   useEffect(() => {
-    if (data && !isFetching && inView && hasNextPage ) {
+    if (data && !isFetching && inView && hasNextPage) {
       fetchNextPage();
     }
   }, [inView]);
@@ -39,7 +39,9 @@ export const PetList = () => {
             My apologies, there was a problem with retrieving pets from the shelters.
           </p>
           <p className="text-center text-md italic font-semibold text-gray-600">Click the button below to retry</p>
-          <Button className="mt-4" onClick={handleRetryRefetch} disabled={isFetching}>Retry</Button>
+          <Button className="mt-4" onClick={handleRetryRefetch} disabled={isFetching}>
+            Retry
+          </Button>
         </div>
       </div>
     );
@@ -48,11 +50,21 @@ export const PetList = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-12">
       <div ref={containerRef} className="flex flex-col items-center justify-center gap-12">
-        {data?.pages.map((page) => (
+        {data?.pages.map((page) =>
           page?.animals.map((pet) => (
-            <PetCard key={pet.id} id={pet.id} photos={pet.photos} name={pet.name} description={pet.description} type={pet.type} age={pet.age} gender={pet.gender} species={pet.species} />
-          ))
-        ))}
+            <PetCard
+              key={pet.id}
+              id={pet.id}
+              photos={pet.photos}
+              name={pet.name}
+              description={pet.description}
+              type={pet.type}
+              age={pet.age}
+              gender={pet.gender}
+              species={pet.species}
+            />
+          )),
+        )}
       </div>
       <div ref={ref} className="flex flex-col items-center justify-center">
         {isFetching ? <Spinner /> : null}
