@@ -2,10 +2,11 @@
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { PetfinderAPI } from '@/services/API';
-import { PetCard } from '@/components/molecules/PetCard';
+import { HOUR } from '@/constants/TIME';
 import { Spinner } from '@/components/atoms/Spinner';
 import { Button } from '@/components/atoms/Button';
+import { PetCard } from '@/components/molecules/PetCard';
+import { PetfinderAPI } from '@/services/API';
 import { useArrowNavigation } from '@/hooks';
 
 export const PetList = () => {
@@ -19,6 +20,7 @@ export const PetList = () => {
       lastPage.pagination.current_page < lastPage.pagination.total_pages
         ? lastPage.pagination.current_page + 1
         : undefined,
+    staleTime: HOUR,
   });
 
   const handleRetryRefetch = () => {

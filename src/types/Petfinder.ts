@@ -23,6 +23,7 @@ export type Animal = {
   name: string;
   description: string;
   photos: PetPhoto[];
+  primary_photo_cropped: PetPhoto;
   status: PetStatus;
   published_at: string;
   contact: Contact;
