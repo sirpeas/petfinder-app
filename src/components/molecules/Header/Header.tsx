@@ -22,7 +22,10 @@ export const Header = () => {
             key={n.url}
             href={n.url}
             aria-label={n.label}
-            className={clsx('hover:transform-[scale(1.2)] transition-transform text-gray-800', pathname === n.url ? 'transform-[scale(1.4)]' : '')}>{n.name}</Link>
+            title={n.label}
+            className={clsx('hover:transform-[scale(1.2)] transition-transform text-gray-800', pathname === n.url ? 'transform-[scale(1.4)]' : '')}>
+            {n.name}
+          </Link>
         ))}
       </nav>
     </header>

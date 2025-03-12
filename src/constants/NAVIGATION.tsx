@@ -11,7 +11,7 @@ export const NAVIGATION = [{
   name: <Shuffle size={24} />,
 }, {
   url: ROUTES.LIST,
-  label: 'Reel list',
+  label: 'Pet reel list',
   name: <Rows size={24} />,
 }, {
   url: ROUTES.SEARCH,
