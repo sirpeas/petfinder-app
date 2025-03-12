@@ -25,7 +25,7 @@ export const PetCard: FC<Props> = (props) => {
 
   return (
     <div className="max-w-xl max-h-screen w-full rounded bg-white p-8 flex flex-col">
-      <div className="relative min-h-[200px] h-[60vh] flex-shrink-0 overflow-hidden bg-gray-100">
+      <div className="relative min-h-[200px] h-[40vh] sm:h-[50vh] md:h-[60vh] flex-shrink-0 overflow-hidden bg-gray-100">
         <div className="absolute bottom-0 left-0 right-0 flex flex-row justify-between">
           <Heading as="h3" className="py-2 px-4 bg-white">
             {name}
@@ -34,7 +34,6 @@ export const PetCard: FC<Props> = (props) => {
             <Heart size={32} weight={isFavourite(id) ? 'fill' : 'regular'} color="#e12c2c" />
           </button>
         </div>
-        {/* Image */}
         <img className="w-full h-full object-cover object-top" src={mainPhoto} alt={`${name} ${type}`} />
       </div>
 
