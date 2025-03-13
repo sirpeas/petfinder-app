@@ -1,4 +1,6 @@
 'use client';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
@@ -8,6 +10,8 @@ import { Button } from '@/components/atoms/Button';
 import { PetCard } from '@/components/molecules/PetCard';
 import { PetfinderAPI } from '@/services/API';
 import { useArrowNavigation } from '@/hooks';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const PetList = () => {
   const { ref, inView } = useInView({ threshold: 1 });

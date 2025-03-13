@@ -1,14 +1,17 @@
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { Heart } from '@phosphor-icons/react/dist/ssr';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useCallback, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Heading } from '@/components/atoms/Heading';
 import { ROUTES } from '@/constants/ROUTES';
-import { Props } from './types';
 import { useAddToFavouritesLS } from '@/hooks';
+import { Props } from './types';
 
 export const PetCard: FC<Props> = (props) => {
   const { id, photos, name, age, type, species, gender, description } = props;
+  const cardRef = useRef<HTMLElement>(null);
 
   const { isFavourite, toggleFavourite } = useAddToFavouritesLS();
 
@@ -23,8 +26,31 @@ export const PetCard: FC<Props> = (props) => {
     toggleFavourite(id);
   }, [id, toggleFavourite]);
 
+  useGSAP(
+    () => {
+      if (!cardRef.current) return;
+
+      gsap.fromTo(
+        cardRef.current,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: cardRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+          },
+        },
+      );
+    },
+    { scope: cardRef },
+  );
+
   return (
-    <section className="max-w-xl max-h-screen w-full rounded bg-white p-8 flex flex-col">
+    <section ref={cardRef} className="max-w-xl max-h-screen w-full rounded bg-white p-8 flex flex-col">
       <header className="relative min-h-[200px] h-[40vh] sm:h-[50vh] md:h-[60vh] flex-shrink-0 overflow-hidden bg-gray-100">
         <div className="absolute bottom-0 left-0 right-0 flex flex-row justify-between">
           <Heading as="h3" className="py-2 px-4 bg-white text-gray-600">

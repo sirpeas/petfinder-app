@@ -6,9 +6,11 @@ export const Hero = () => {
     <div className="max-w-7xl mx-auto flex flex-col justify-between items-center relative">
       <div className="w-full p-8">
         <Heading as="h1">Welcome to PetFinder</Heading>
-        <Heading as="h2">Let&apos;s find your friend</Heading>
+        <Heading as="h2" className="mt-4">
+          Let&apos;s find your friend
+        </Heading>
       </div>
-      <Image src="/hero/hero_pets.svg" alt="hero" width={600} height={500} />
+      <Image src="/hero/hero_pets.svg" alt="hero" width={500} height={500} />
     </div>
   );
 };
