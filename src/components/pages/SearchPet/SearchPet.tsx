@@ -1,25 +1,18 @@
 'use client';
+import clsx from 'clsx';
+import { FormProvider, useForm } from 'react-hook-form';
 import { useState, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import { useMutation } from '@tanstack/react-query';
 import { Spinner } from '@/components/atoms/Spinner';
 import { Table } from '@/components/organisms/Table';
-import { PetfinderAPI } from '@/services/API';
-import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/constants/ROUTES';
-import { Animal } from '@/types/Petfinder';
 import { Pagination } from '@/components/molecules/Pagination';
-import { useMutation } from '@tanstack/react-query';
-import clsx from 'clsx';
 import { PetSearchForm } from '@/components/pages/SearchPet/PetSearchForm';
 import { AnimalSearchParams } from '@/services/API/Petfinder/types';
-import { FormProvider, useForm } from 'react-hook-form';
-
-const TABLE_COLUMNS = [
-  { key: 'name', label: 'Name' },
-  { key: 'species', label: 'Specie' },
-  { key: 'breeds.primary', label: 'Breed' },
-  { key: 'age', label: 'Age' },
-  { key: 'colors.primary', label: 'Colors' },
-];
+import { Animal } from '@/types/Petfinder';
+import { PetfinderAPI } from '@/services/API';
+import { TABLE_COLUMNS } from './constants';
 
 export const SearchPet = () => {
   const [currentPage, setCurrentPage] = useState(1);
