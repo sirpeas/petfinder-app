@@ -3,13 +3,15 @@ import { useState, useCallback } from 'react';
 import { Spinner } from '@/components/atoms/Spinner';
 import { Table } from '@/components/organisms/Table';
 import { PetfinderAPI } from '@/services/API';
-import { HOUR } from '@/constants/TIME';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/constants/ROUTES';
 import { Animal } from '@/types/Petfinder';
 import { Pagination } from '@/components/molecules/Pagination';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import clsx from 'clsx';
+import { PetSearchForm } from '@/components/pages/SearchPet/PetSearchForm';
+import { AnimalSearchParams } from '@/services/API/Petfinder/types';
+import { FormProvider, useForm } from 'react-hook-form';
 
 const TABLE_COLUMNS = [
   { key: 'name', label: 'Name' },
@@ -21,13 +23,13 @@ const TABLE_COLUMNS = [
 
 export const SearchPet = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const formMethods = useForm();
   const router = useRouter();
 
-  const { data, isFetching } = useQuery({
-    queryKey: ['animals', currentPage],
-    queryFn: async () => PetfinderAPI.getAnimals({ page: currentPage }),
-    staleTime: HOUR,
-    placeholderData: (prev) => prev,
+  const { mutate, data, isPending, isSuccess } = useMutation({
+    mutationKey: ['animals', currentPage], // ✅ No searchParams in key
+    mutationFn: async ({ page, params }: { page: number; params: AnimalSearchParams }) =>
+      PetfinderAPI.getAnimals({ page, ...params }),
   });
 
   const handleRedirectToPetView = useCallback(
@@ -43,13 +45,28 @@ export const SearchPet = () => {
     }
   };
 
+  const handleSubmit = formMethods.handleSubmit((formValues) => {
+    setCurrentPage(1);
+    const filteredParams = Object.fromEntries(Object.entries(formValues).filter(([_, value]) => Boolean(value)));
+    mutate({ page: 1, params: filteredParams });
+  });
+
   return (
-    <>
-      <div className="flex flex-col items-center justify-center">
-        <div>form</div>
+    <FormProvider {...formMethods}>
+      <div className="flex flex-col">
+        <div className="w-full flex flex-row p-8 gap-4 bg-white mb-8">
+          <PetSearchForm handleSubmit={handleSubmit} isSending={isPending} />
+        </div>
         <div className="w-full flex flex-col items-center justify-center relative">
+          {isSuccess && !data?.animals.length ? (
+            <div className={clsx('w-full p-8 bg-white')}>
+              <p className="text-center text-lg italic font-semibold text-gray-600">
+                There are no pets matching your search criteria
+              </p>
+            </div>
+          ) : null}
           {data?.animals.length ? (
-            <div className={clsx('w-full', isFetching && 'opacity-50 pointer-events-none')}>
+            <div className={clsx('w-full p-8 bg-white', isPending && 'opacity-50 pointer-events-none')}>
               <Table columns={TABLE_COLUMNS} data={data.animals} onRowClick={handleRedirectToPetView} />
               <Pagination
                 currentPage={data.pagination.current_page}
@@ -58,13 +75,13 @@ export const SearchPet = () => {
               />
             </div>
           ) : null}
-          {isFetching ? (
+          {isPending ? (
             <div className="absolute top-4">
               <Spinner />
             </div>
           ) : null}
         </div>
-        {!data && !isFetching ? (
+        {!data && !isPending && isSuccess ? (
           <div className="py-12 flex flex-col items-center justify-center">
             <p className="text-center text-lg italic font-semibold text-gray-600">
               Seems like you seen all of the pets.
@@ -72,7 +89,7 @@ export const SearchPet = () => {
           </div>
         ) : null}
       </div>
-    </>
+    </FormProvider>
   );
 };
 
