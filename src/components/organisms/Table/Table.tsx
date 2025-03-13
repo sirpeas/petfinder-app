@@ -26,9 +26,9 @@ export const Table = <T extends object>(props: Props<T>) => {
     <table className="w-full">
       <thead className="bg-white">
         {table.getHeaderGroups().map((headerGroup) => (
-          <tr key={headerGroup.id} className="">
+          <tr key={headerGroup.id} className="bg-gray-100">
             {headerGroup.headers.map((header) => (
-              <th key={header.id} className="p-2 text-left">
+              <th key={header.id} className="px-2 py-4 text-left">
                 <div className="flex items-center gap-2">
                   {flexRender(header.column.columnDef.header, header.getContext())}
                   {isLocalSortingEnabled ? (
@@ -61,7 +61,7 @@ export const Table = <T extends object>(props: Props<T>) => {
             onClick={() => onRowClick?.(row.original)}
           >
             {row.getVisibleCells().map((cell) => (
-              <td key={cell.id} className="p-2 text-md">
+              <td key={cell.id} className="px-2 py-4 text-md">
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
             ))}
