@@ -13,10 +13,18 @@ import { AnimalSearchParams } from '@/services/API/Petfinder/types';
 import { Animal } from '@/types/Petfinder';
 import { PetfinderAPI } from '@/services/API';
 import { TABLE_COLUMNS } from './constants';
+import { FormValues } from './types';
 
 export const SearchPet = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const formMethods = useForm();
+  const formMethods = useForm<FormValues>({
+    defaultValues: {
+      age: '',
+      size: '',
+      status: '',
+      name: '',
+    },
+  });
   const router = useRouter();
 
   const { mutate, data, isPending, isSuccess } = useMutation({
@@ -44,11 +52,13 @@ export const SearchPet = () => {
     mutate({ page: 1, params: filteredParams });
   });
 
+  const handleReset = () => formMethods.reset();
+
   return (
     <FormProvider {...formMethods}>
       <div className="flex flex-col">
         <div className="w-full flex flex-row p-8 gap-4 bg-white mb-8">
-          <PetSearchForm handleSubmit={handleSubmit} isSending={isPending} />
+          <PetSearchForm handleSubmit={handleSubmit} handleReset={handleReset} isSending={isPending} />
         </div>
         <div className="w-full flex flex-col items-center justify-center relative">
           {isSuccess && !data?.animals.length ? (
