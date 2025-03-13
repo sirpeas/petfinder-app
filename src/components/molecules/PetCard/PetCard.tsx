@@ -1,7 +1,7 @@
 import { Heart } from '@phosphor-icons/react/dist/ssr';
-
 import { FC, useCallback, useMemo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Heading } from '@/components/atoms/Heading';
 import { ROUTES } from '@/constants/ROUTES';
 import { Props } from './types';
@@ -34,7 +34,19 @@ export const PetCard: FC<Props> = (props) => {
             <Heart size={32} weight={isFavourite(id) ? 'fill' : 'regular'} color="#e12c2c" />
           </button>
         </div>
-        <img className="w-full h-full object-cover object-top" src={mainPhoto} alt={`${name} ${type}`} />
+        {mainPhoto ? (
+          <Image
+            className="w-full h-full object-cover object-top"
+            src={mainPhoto}
+            alt={`${name} ${type}`}
+            width={512}
+            height={512}
+          />
+        ) : (
+          <div className=" w-full h-full bg-gray-700 flex justify-center items-center">
+            <p className="text-white font-semibold">No photo</p>
+          </div>
+        )}
       </header>
 
       <div className="flex-grow flex flex-col justify-between">

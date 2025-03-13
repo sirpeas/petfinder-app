@@ -2,16 +2,18 @@
 import { Heart } from '@phosphor-icons/react/dist/ssr';
 import { FC, useCallback, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
+import Image from 'next/image';
 import { HOUR } from '@/constants/TIME';
 import { Spinner } from '@/components/atoms/Spinner';
 import { PetfinderAPI } from '@/services/API';
 import { Heading } from '@/components/atoms/Heading';
 import { useAddToFavouritesLS } from '@/hooks';
-import { Props } from './types';
 import { Tag } from '@/components/atoms/Tag';
 import { pascalCaseToReadable } from '@/helpers/stringHelpers';
 import { AnimalAttributes } from '@/types/Petfinder';
-import Link from 'next/link';
+import { Props } from './types';
+import clsx from 'clsx';
 
 export const PetView: FC<Props> = (props) => {
   const { isFavourite, toggleFavourite } = useAddToFavouritesLS();
@@ -40,7 +42,7 @@ export const PetView: FC<Props> = (props) => {
     if (props.id) {
       toggleFavourite(props.id);
     }
-  }, [props.id]);
+  }, [props.id, toggleFavourite]);
 
   const attributes = useMemo(() => {
     if (animal?.attributes) {
@@ -77,20 +79,26 @@ export const PetView: FC<Props> = (props) => {
       ) : null}
       {animal ? (
         <div className="flex flex-col md:flex-row items-start gap-8">
-          <div className="md:max-w-lg gap-5">
+          <div className={clsx('md:max-w-lg gap-5', !animal.primary_photo_cropped && 'hidden md:flex')}>
             <div className="flex flex-col">
               <div className="flex flex-col bg-white p-8">
-                <img
-                  className="w-full h-full object-cover object-top"
-                  src={animal.primary_photo_cropped?.large ?? null}
-                  alt={`${animal.name} ${animal.type}`}
-                />
+                {animal.primary_photo_cropped?.large ? (
+                  <Image
+                    className="w-full h-full object-cover object-top"
+                    src={animal.primary_photo_cropped?.large}
+                    alt={`${animal.name} ${animal.type}`}
+                  />
+                ) : (
+                  <div className=" w-full md:w-xs h-80 bg-gray-700 flex justify-center items-center">
+                    <p className="text-white font-semibold">No photo</p>
+                  </div>
+                )}
               </div>
             </div>
             <div className="mg-2 flex flex-row overflow-hidden ">
               {smallPhotos.map((p, i) => (
                 <div key={p} className="bg-white pb-8 pl-9 last:pr-8">
-                  <img className="max-h-28" src={p} alt={`${animal.name} ${i}`} />
+                  <Image className="max-h-28" src={p} alt={`${animal.name} ${i}`} />
                 </div>
               ))}
             </div>
