@@ -1,6 +1,7 @@
 'use client';
 import { Heart } from '@phosphor-icons/react/dist/ssr';
 import { FC, useCallback, useMemo } from 'react';
+import clsx from 'clsx';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -10,10 +11,9 @@ import { PetfinderAPI } from '@/services/API';
 import { Heading } from '@/components/atoms/Heading';
 import { useAddToFavouritesLS } from '@/hooks';
 import { Tag } from '@/components/atoms/Tag';
-import { pascalCaseToReadable } from '@/helpers/stringHelpers';
+import { capitalizeFirstLetter, pascalCaseToReadable } from '@/helpers/stringHelpers';
 import { AnimalAttributes } from '@/types/Petfinder';
 import { Props } from './types';
-import clsx from 'clsx';
 
 export const PetView: FC<Props> = (props) => {
   const { isFavourite, toggleFavourite } = useAddToFavouritesLS();
@@ -112,7 +112,7 @@ export const PetView: FC<Props> = (props) => {
                 <div>
                   <Heading as="h2">{animal.name}</Heading>
                   <p className="text-xs py-2 text-gray-500">
-                    {animal.age} - {animal.gender} - {animal.species}
+                    {animal.age} - {animal.gender} - {animal.species} - {capitalizeFirstLetter(animal.status)}
                   </p>
                 </div>
                 <button className="bg-white p-2 cursor-pointer" onClick={handleToggleFavourite}>
