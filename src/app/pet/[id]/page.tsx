@@ -1,7 +1,12 @@
 import { QueryClient, dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
+import type { Metadata } from 'next';
 import { PetfinderAPI } from '@/services/API';
 import { PetView } from '@/components/pages/PetView';
+
+export const metadata: Metadata = {
+  title: 'PetFinder - Pet',
+};
 
 export default async function Page({ params }: { params: { id: string } }) {
   const { id } = await params;

@@ -1,12 +1,16 @@
 import { QueryClient, dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
-import { PetfinderAPI } from '@/services/API';
+import type { Metadata } from 'next';
 import { SearchPet } from '@/components/pages/SearchPet';
+import { PetfinderAPI } from '@/services/API';
+
+export const metadata: Metadata = {
+  title: 'PetFinder - Search pets',
+};
 
 export default async function Page() {
   const queryClient = new QueryClient();
 
-  // Prefetch data for this page
   await queryClient.prefetchQuery({
     queryKey: ['animals'],
     queryFn: async () => await PetfinderAPI.getAnimals(),
