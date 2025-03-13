@@ -6,7 +6,6 @@ export const useRefScrollListener = (
   startToWatch = true,
 ) => {
   useEffect(() => {
-    // const element = ref.current;
     if (startToWatch) {
       document.addEventListener('scroll', callback);
     } else {

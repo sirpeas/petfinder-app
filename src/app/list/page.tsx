@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 export default async function Page() {
   const queryClient = new QueryClient();
 
-  // Prefetch data for this page
   await queryClient.prefetchQuery({
     queryKey: ['animals'],
     queryFn: async () => await PetfinderAPI.getAnimals(),

@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAccessToken } from '@/lib/api/getPetfinderToken';
 
-export async function GET(req: NextRequest, context: { params: { proxy?: string[] } }) {
+type ProxyParams = Promise<{ proxy?: string[] }>;
+export async function GET(req: NextRequest, context: { params: ProxyParams }) {
   try {
     const { proxy } = await context.params;
 
@@ -9,7 +10,7 @@ export async function GET(req: NextRequest, context: { params: { proxy?: string[
       return NextResponse.json({ error: 'Invalid API path' }, { status: 400 });
     }
 
-    const apiPath = proxy.join('/'); // Join dynamic path segments
+    const apiPath = proxy.join('/');
     const accessToken = await getAccessToken();
 
     if (!accessToken) {
@@ -30,7 +31,7 @@ export async function GET(req: NextRequest, context: { params: { proxy?: string[
     });
 
     if (!response.ok) {
-      return NextResponse.json({ error: 'Failed to fetch from Petfinder API' }, { status: response.status });
+      return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 
     const data = await response.json();
