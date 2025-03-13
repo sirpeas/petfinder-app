@@ -32,7 +32,7 @@ export async function GET(
     });
 
     if (!response.ok) {
-      throw new Error(`Petfinder API error: ${response.status} ${response.statusText}`);
+      return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 
     const data = await response.json();
