@@ -12,7 +12,7 @@ export const FormSelect: FC<Props> = (props) => {
   return (
     <div className="flex flex-col w-full md:w-auto">
       {label ? (
-        <label className="font-semibold mb-1" htmlFor={name}>
+        <label className="font-semibold mb-1 text-gray-500" htmlFor={name}>
           {label}
         </label>
       ) : null}
@@ -21,7 +21,7 @@ export const FormSelect: FC<Props> = (props) => {
           {...restProps}
           id={name}
           className={clsx(
-            'appearance-none border rounded-md px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-sky-100 w-full',
+            'appearance-none border border-gray-500 rounded-md px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-gray-300 w-full',
             className,
           )}
           {...register(name, rules)}

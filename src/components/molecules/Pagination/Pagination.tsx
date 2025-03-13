@@ -12,13 +12,13 @@ export const Pagination: FC<Props> = (props) => {
 
   return (
     <div className="flex flex-row justify-between p-2 bg-white mt-2">
-      <div className="flex flex-row gap-1">
+      <div className="flex flex-row gap-1 text-gray-600">
         <span>Page {currentPage}</span>
         <span>of</span>
         <span>{totalPages}</span>
       </div>
 
-      <div className="flex flex-row gap-2">
+      <div className="flex flex-row gap-2 text-gray-600">
         {paginationLinks.map((page) => (
           <PaginationItem key={page} page={page} onClick={onPageChange} isCurrentPage={page === currentPage} />
         ))}

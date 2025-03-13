@@ -12,7 +12,7 @@ export const PaginationItem: FC<Props> = (props) => {
   }
 
   return (
-    <button className="cursor-pointer" onClick={handleOnClick}>
+    <button className="cursor-pointer text-gray-600" onClick={handleOnClick}>
       {page}
     </button>
   );

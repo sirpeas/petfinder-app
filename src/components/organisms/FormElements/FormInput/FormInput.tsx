@@ -11,7 +11,7 @@ export const FormInput: FC<Props> = (props) => {
   return (
     <div className="flex flex-col w-full md:w-auto">
       {label ? (
-        <label className="font-semibold mb-1" htmlFor={name}>
+        <label className="font-semibold mb-1 text-gray-500" htmlFor={name}>
           {label}
         </label>
       ) : null}
@@ -21,7 +21,10 @@ export const FormInput: FC<Props> = (props) => {
         type={type}
         placeholder={placeholder}
         defaultValue={defaultValue}
-        className={clsx('border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-100', className)}
+        className={clsx(
+          'border border-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-300',
+          className,
+        )}
       />
     </div>
   );

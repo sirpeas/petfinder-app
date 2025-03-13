@@ -24,8 +24,8 @@ export const Header = () => {
             aria-label={n.label}
             title={n.label}
             className={clsx(
-              'hover:transform-[scale(1.2)] transition-transform text-gray-800',
-              pathname === n.url ? 'transform-[scale(1.4)]' : '',
+              'hover:transform-[scale(1.2)] transition-transform text-gray-500',
+              pathname === n.url ? 'transform-[scale(1.2)] text-gray-900' : '',
             )}
           >
             {n.name}

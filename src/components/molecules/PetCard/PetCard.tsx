@@ -27,7 +27,7 @@ export const PetCard: FC<Props> = (props) => {
     <section className="max-w-xl max-h-screen w-full rounded bg-white p-8 flex flex-col">
       <header className="relative min-h-[200px] h-[40vh] sm:h-[50vh] md:h-[60vh] flex-shrink-0 overflow-hidden bg-gray-100">
         <div className="absolute bottom-0 left-0 right-0 flex flex-row justify-between">
-          <Heading as="h3" className="py-2 px-4 bg-white">
+          <Heading as="h3" className="py-2 px-4 bg-white text-gray-600">
             {name}
           </Heading>
           <button className="bg-white p-2 cursor-pointer" onClick={handleToggleFavourite}>
@@ -51,14 +51,14 @@ export const PetCard: FC<Props> = (props) => {
 
       <div className="flex-grow flex flex-col justify-between">
         <div>
-          <p className="text-xs py-2 text-gray-800">
+          <p className="text-xs py-2 text-gray-500">
             {age} - {gender} - {species}
           </p>
-          <p className="italic text-gray-800">{description}</p>
+          <p className="italic text-gray-500">{description}</p>
         </div>
         <div className="flex flex-col items-end mt-2">
           <Link
-            className="font-semibold text-gray-800 hover:scale-105 transition-transform"
+            className="font-semibold text-gray-500 hover:scale-105 transition-transform"
             href={ROUTES.SINGLE_PET.replace(':id', String(id))}
           >
             Read more

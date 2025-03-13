@@ -87,6 +87,8 @@ export const PetView: FC<Props> = (props) => {
                     className="w-full h-full object-cover object-top"
                     src={animal.primary_photo_cropped?.large}
                     alt={`${animal.name} ${animal.type}`}
+                    width={400}
+                    height={400}
                   />
                 ) : (
                   <div className=" w-full md:w-xs h-80 bg-gray-700 flex justify-center items-center">
@@ -109,7 +111,7 @@ export const PetView: FC<Props> = (props) => {
               <div className="w-full flex flex-row justify-between items-center">
                 <div>
                   <Heading as="h2">{animal.name}</Heading>
-                  <p className="text-xs py-2 text-gray-800">
+                  <p className="text-xs py-2 text-gray-500">
                     {animal.age} - {animal.gender} - {animal.species}
                   </p>
                 </div>
@@ -130,7 +132,7 @@ export const PetView: FC<Props> = (props) => {
               ) : null}
               {animal.description ? (
                 <div className="my-4">
-                  <p className="italic text-gray-800">{animal.description}</p>
+                  <p className="italic text-gray-500">{animal.description}</p>
                 </div>
               ) : null}
               <div className="flex flex-row gap-2 flex-wrap mt-4">

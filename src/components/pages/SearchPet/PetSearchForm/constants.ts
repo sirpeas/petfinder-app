@@ -15,6 +15,7 @@ export const SIZE_OPTIONS = [
 ];
 
 export const ADOPTABLE_OPTIONS = [
+  { label: 'Any', value: '' },
   { label: 'Adoptable', value: 'adoptable' },
   { label: 'Adopted', value: 'adopted' },
 ];
