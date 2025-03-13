@@ -38,7 +38,7 @@ export const PetList = () => {
       <div>
         <div className="py-12 flex flex-col items-center justify-center">
           <p className="text-center text-xl italic font-semibold text-gray-600">
-            My apologies, there was a problem with retrieving pets from the shelters.
+            My apologies, there was a problem with retrieving pets from the shelter.
           </p>
           <p className="text-center text-md italic font-semibold text-gray-600">Click the button below to retry</p>
           <Button className="mt-4" onClick={handleRetryRefetch} disabled={isFetching}>
