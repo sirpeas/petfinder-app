@@ -21,11 +21,11 @@ export const PetCard: FC<Props> = (props) => {
 
   const handleToggleFavourite = useCallback(() => {
     toggleFavourite(id);
-  }, [id]);
+  }, [id, toggleFavourite]);
 
   return (
-    <div className="max-w-xl max-h-screen w-full rounded bg-white p-8 flex flex-col">
-      <div className="relative min-h-[200px] h-[40vh] sm:h-[50vh] md:h-[60vh] flex-shrink-0 overflow-hidden bg-gray-100">
+    <section className="max-w-xl max-h-screen w-full rounded bg-white p-8 flex flex-col">
+      <header className="relative min-h-[200px] h-[40vh] sm:h-[50vh] md:h-[60vh] flex-shrink-0 overflow-hidden bg-gray-100">
         <div className="absolute bottom-0 left-0 right-0 flex flex-row justify-between">
           <Heading as="h3" className="py-2 px-4 bg-white">
             {name}
@@ -35,7 +35,7 @@ export const PetCard: FC<Props> = (props) => {
           </button>
         </div>
         <img className="w-full h-full object-cover object-top" src={mainPhoto} alt={`${name} ${type}`} />
-      </div>
+      </header>
 
       <div className="flex-grow flex flex-col justify-between">
         <div>
@@ -53,7 +53,7 @@ export const PetCard: FC<Props> = (props) => {
           </Link>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 PetCard.displayName = 'PetCard';

@@ -15,7 +15,7 @@ import Link from 'next/link';
 
 export const PetView: FC<Props> = (props) => {
   const { isFavourite, toggleFavourite } = useAddToFavouritesLS();
-  const { data, isFetching } = useQuery({
+  const { data, isFetching, isError } = useQuery({
     queryKey: ['singleAnimal', props.id],
     queryFn: () => {
       if (props.id) {
@@ -24,6 +24,7 @@ export const PetView: FC<Props> = (props) => {
       return null;
     },
     staleTime: HOUR,
+    retry: false,
   });
 
   const animal = data?.animal;
@@ -62,7 +63,18 @@ export const PetView: FC<Props> = (props) => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center">{isFetching ? <Spinner /> : null}</div>
+      {isFetching ? (
+        <div className="flex flex-col items-center justify-center">
+          <Spinner />
+        </div>
+      ) : null}
+      {isError ? (
+        <div className="flex flex-col items-center justify-center">
+          <Heading as="h4" className="bg-white p-4">
+            404 - Seems like pet you are looking for is no longer in the shelter
+          </Heading>
+        </div>
+      ) : null}
       {animal ? (
         <div className="flex flex-col md:flex-row items-start gap-8">
           <div className="md:max-w-lg gap-5">

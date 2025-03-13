@@ -8,7 +8,7 @@ export const Hero: FC<Props> = (props) => {
 
   return (
     <div>
-      <div className="max-w-7xl mx-auto flex justify-between items-center relative min-h-screen">
+      <div className="max-w-7xl mx-auto flex justify-between items-center relative">
         <div className="p-4 absolute top-40">
           <Heading as="h1">Welcome to PetFinder</Heading>
         </div>
