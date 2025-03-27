@@ -78,7 +78,6 @@ export const useArrowNavigation = () => {
         setSelectedIndex(newIndex);
       });
     }
-    return false;
   };
 
   const handleScroll = debounce(() => {
