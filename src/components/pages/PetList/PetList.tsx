@@ -14,7 +14,7 @@ import { useArrowNavigation } from '@/hooks';
 gsap.registerPlugin(ScrollTrigger);
 
 export const PetList = () => {
-  const { ref, inView } = useInView({ threshold: 1 });
+  const { ref, inView } = useInView({ threshold: 1, rootMargin: '50px' });
   const { containerRef } = useArrowNavigation();
   const { data, isFetching, isError, hasNextPage, fetchNextPage, refetch } = useInfiniteQuery({
     queryKey: ['animals'],
